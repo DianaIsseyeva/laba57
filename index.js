@@ -2,13 +2,15 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const port = 8000;
-// const users = require('./app/users');
+const users = require('./app/users');
+const tasks = require('./app/tasks');
 const mongoose = require('mongoose');
 
 async function start() {
-  await mongoose.connect('mongodb://localhost:27017/shop');
+  await mongoose.connect('mongodb://localhost:27017/todo');
   app.use(express.json());
-  // app.use('/users', users);
+  app.use('/users', users);
+  app.use('/tasks', tasks);
 
   app.listen(port, () => {
     console.log(`Server started on ${port} port!`);
